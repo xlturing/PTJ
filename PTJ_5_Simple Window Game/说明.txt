@@ -1,0 +1,11 @@
+﻿1.运行远程记得将uwcse的jar包加到项目中
+2.实现的功能是按照你的作业要求的分数来的，包括：
+基本要求：
+•	start with three different colored aliens each with a different number of hit points. Each time an alien is shot, its color changes and its hit points decrease until it is dead. Aliens should start at different heights on the screen, and over time, aliens should drop down a level (like the sample executable). When an alien is dead, it should no longer be drawn on the screen (contrary to what is done when you execute the code in the sample file).
+•	allow the user to move the space ship left or right with the keys ">" and "<". Print instructions at the top of the screen telling which keys move the space ship.
+•	check whether the game is over (if there are no more aliens), and if so, prompt the user for another game via a dialog box.
+额外要求（选4个）
+•	Let the space ship move forward and backward as well as right and left.
+•	Have something interesting happen if the aliens reach the bottom of the screen (currently, the aliens just return to the top of the screen).
+•	Increase the level of difficulty as the game progresses
+•	Make the aliens move right to left so that they're harder to shoot.
