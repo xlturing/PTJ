@@ -1,0 +1,10 @@
+#CSE 142 Critters saved settings
+#Wed Mar 12 22:34:38 CST 2014
+Stone=true
+Number\ of\ each\ critter=25
+Width=60
+Secure\ tournament\ mode=true
+Ant=true
+Debug\ output=false
+Network\ features=true
+Height=50
