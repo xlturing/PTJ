@@ -1,0 +1,14 @@
+- Rui (Renee) Xu
+- 11rx3
+- 10054803
+- all of the codes are written by myself unless otherwise specified
+
+Question 1
+- Group1 is the control group (healthy people), whereas group2 is the experimental group (people with arthritis)
+
+Question 2
+- All of the lines from the original data intersect at the same point (5,5,20)
+
+Question 3
+- It was found that the RMSE of the sphere center was approximately 0.0355 mm
+- The RMSE of the sphere radius was approximately 0.070 mm
