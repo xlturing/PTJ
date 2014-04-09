@@ -111,78 +111,46 @@ public class Pong extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// reverse ball bounce
-		if ((ballX >= width - 22) || (ballX <= 0))
-			xinc = -xinc;
-		if ((ballY >= height - 22) || (ballY <= 0))
-			yinc = -yinc;
-		// move ball along
-		ballX += xinc;
-		ballY += yinc;
 		// keep the left paddle inside the screen
 		if (paddleX < 1)
 			paddleX = 1;
-		else if (paddleX > 585)
-			paddleX = 585;
+		else if (paddleX > width / 2 - 5 - 15)
+			paddleX = width / 2 - 5 - 15;
 		if (paddleY < 0)
 			paddleY = 0;
 		else if (paddleY > 460)
 			paddleY = 460;
 		// keep the right paddle inside the screen
-		if (paddleTwoX < 1)
-			paddleTwoX = 1;
+		if (paddleTwoX < width / 2 - 5)
+			paddleTwoX = width / 2 - 5;
 		else if (paddleTwoX > 585)
 			paddleTwoX = 585;
 		if (paddleTwoY < 0)
 			paddleTwoY = 0;
 		else if (paddleTwoY > 460)
 			paddleTwoY = 460;
-		if ((ballX == paddleX + 15) && (ballY >= paddleY - 15)
-				&& (ballY <= paddleY + 90)) {
+
+		if (isOverlap(ballX, ballY, ballX + 22, ballY + 22, paddleX, paddleY,
+				paddleX + 15, paddleY + 90)) {
 			xinc = -xinc;
+			ballX = (xinc < 0 ? paddleX - 22 : paddleX + 15);
 		}
-		if ((ballX == paddleX - 22) && (ballY >= paddleY - 15)
-				&& (ballY <= paddleY + 90)) {
+		else if (isOverlap(ballX, ballY, ballX + 22, ballY + 22, paddleTwoX,
+				paddleTwoY, paddleTwoX + 15, paddleTwoY + 90)) {
 			xinc = -xinc;
+			ballX = (xinc < 0 ? paddleTwoX - 22 : paddleTwoX + 15);
 		}
-		if ((ballY == paddleY + 90) && (ballX >= paddleX - 15)
-				&& (ballX <= paddleX)) {
-			yinc = -yinc;
-		}
-		if ((ballY == paddleY - 22) && (ballX >= paddleX - 15)
-				&& (ballX <= paddleX)) {
-			yinc = -yinc;
-		}
-		if ((ballX == paddleTwoX + 15) && (ballY >= paddleTwoY - 15)
-				&& (ballY <= paddleTwoY + 90)) {
+
+		// reverse ball bounce
+		if ((ballX >= width - 22) || (ballX <= 0))
 			xinc = -xinc;
-		}
-		if ((ballX == paddleTwoX - 22) && (ballY >= paddleTwoY - 15)
-				&& (ballY <= paddleTwoY + 90)) {
-			xinc = -xinc;
-		}
-		if ((ballY == paddleTwoY + 90) && (ballX >= paddleTwoX - 15)
-				&& (ballX <= paddleTwoX)) {
+		if ((ballY >= height - 22) || (ballY <= 0))
 			yinc = -yinc;
-		}
-		if ((ballY == paddleTwoY - 22) && (ballX >= paddleTwoX - 15)
-				&& (ballX <= paddleTwoX)) {
-			yinc = -yinc;
-		}
-		if ((ballX == paddleX - 22) && (ballY == paddleY - 22)
-				|| (ballX == paddleX + 15) && (ballY == paddleY - 22)
-				|| (ballX == paddleX - 22) && (ballY == paddleY + 90)
-				|| (ballX == paddleX + 15) && (ballY == paddleY + 90)) {
-			xinc = -xinc;
-			yinc = -yinc;
-		}
-		if ((ballX == paddleTwoX - 22) && (ballY == paddleTwoY - 22)
-				|| (ballX == paddleTwoX + 15) && (ballY == paddleTwoY - 22)
-				|| (ballX == paddleTwoX - 22) && (ballY == paddleTwoY + 90)
-				|| (ballX == paddleTwoX + 15) && (ballY == paddleTwoY + 90)) {
-			xinc = -xinc;
-			yinc = -yinc;
-		}
+
+		// move ball along
+		ballX += xinc;
+		ballY += yinc;
+		
 		// player 1 scores 1 point when the ball bounce to the right side
 		if (ballX == width - 22) {
 			player1score++;
@@ -202,6 +170,17 @@ public class Pong extends JPanel implements ActionListener, KeyListener {
 			gameover = true;
 		}
 		f.repaint(); // stuffed has moved, it would repaint itself
+	}
+
+	// decide wether the ball and paddle are overlap
+	private boolean isOverlap(int x1, int y1, int x2, int y2, int x3, int y3,
+			int x4, int y4) {
+		boolean flag = false;
+		if (!((x3 < x1) && (x4 < x1) || (x3 > x2) && (x4 > x2) || (y3 < y1)
+				&& (y4 < y1) || (y3 > y2) && (y4 > y2)))
+			flag = true;
+
+		return flag;
 	}
 
 	@Override
