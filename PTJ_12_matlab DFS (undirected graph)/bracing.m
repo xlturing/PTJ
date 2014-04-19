@@ -32,10 +32,12 @@ end
 edges
 
 % DFS graph and decide whether this grid is bracing and minimal
-[flag,vertices, edges, v, visited] = DFS(vertices, edges, 1, visited, 0);
-if(all(visited) == 1 & flag == 1)
+start = 1; % DFS start vertical
+predecessor(start) = -1; % set a flag
+[vertices, edges, v, visited, predecessor] = DFS(vertices, edges, start, visited, predecessor);
+if(all(visited) == 1 & findCircle(edges) == 1)
     disp('This grid is bracing, but not minimal');
-elseif(all(visited) == 1 & flag == 0)
+elseif(all(visited) == 1 & findCircle(edges) == 0)
     disp('This grid is bracing, and minimal');
 else
     disp('This grid is not bracing');
@@ -44,7 +46,7 @@ end
 
 %% Project checkpoint #3 
 % DFS Function implement
-function [flag,vertices, edges, v, visited] = DFS(vertices, edges, v, visited, pre)
+function [vertices, edges, v, visited, predecessor] = DFS(vertices, edges, v, visited, predecessor)
 % depth first search
 % flag - exist loop in this graph? 1 yes, 0 no
 % vertices - vertics
@@ -52,20 +54,39 @@ function [flag,vertices, edges, v, visited] = DFS(vertices, edges, v, visited, p
 % v - start vertic
 % visited -  remember which vertices you have already visited, 1 visited, 0
 % unvisited
-% pre - father vertic
+% predecessor - father vertic
 visited(v) = 1;
-flag = 0;
 for i = 1:size(edges)
     % if there is a edge between vertic i and v, then label it and DFS from here 
-    if( edges(i,v) == 1)
+    if( edges(v,i) == 1)
         if(visited(i) == 0)
             visited(i) = 1;
-            %predecessor(i) = v;
-            [flag,vertices, edges, v, visited]= DFS(vertices, edges, i, visited, v);
-        elseif(pre~= i)
-            % exist loop in this graph
-            flag = 1;
+            visited(v) = 1;
+            predecessor(i) = v;
+            [vertices, edges, v, visited, predecessor]= DFS(vertices, edges, i, visited, predecessor);
         end
     end
 end
+end
+
+function [flag] = findCircle(edges)
+% find the graph wether exist circle
+% edges - adjacency graph
+% flag - 1 if exist circle, otherwise 0
+  flag = 0;
+  n = size(edges);
+  pre = zeros(n,n);
+  while(isequal(pre,edges)==0)
+      pre = edges;
+      for i = 1 : n
+        pos_one = find(edges(i,:)); % find the node which degree is 1
+        if(length(pos_one) == 1) 
+            edges(:,pos_one) = 0; % and delete this node
+            edges(pos_one,:) = 0;
+        end
+      end
+  end
+  if(any(any(edges)) == 1) % if there are some nodes exist, then this graph have circle
+      flag = 1;
+  end
 end
