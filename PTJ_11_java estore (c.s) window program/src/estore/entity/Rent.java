@@ -7,6 +7,7 @@ public class Rent {
 	private String rent_date;
 	private String due_date;
 	private String return_date;
+	private double late_fee;
 
 	public int getId() {
 		return id;
@@ -55,4 +56,13 @@ public class Rent {
 	public void setReturn_date(String return_date) {
 		this.return_date = return_date;
 	}
+
+	public double getLate_fee() {
+		return late_fee;
+	}
+
+	public void setLate_fee(double late_fee) {
+		this.late_fee = late_fee;
+	}
+
 }

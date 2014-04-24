@@ -90,7 +90,6 @@ public class LoginFrame extends JFrame {
 							MainFrame.user_id = u.getId();
 							WindowUtil.centreWindow(mainFrame);
 							mainFrame.setVisible(true);
-							System.out.println("haha");
 						}
 					});
 				}

@@ -9,11 +9,14 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import estore.dao.CopyDao;
 import estore.entity.Copy;
+import estore.entity.User;
+import estore.util.WindowUtil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -120,6 +123,7 @@ public class ModifyPanel extends JPanel {
 			}
 		});
 		table.getColumnModel().getColumn(0).setPreferredWidth(59);
+		table.setEditingColumn(6);
 		scrollPane.setViewportView(table);
 
 		JButton jbt_update = new JButton("update");
@@ -129,15 +133,25 @@ public class ModifyPanel extends JPanel {
 				if (row == -1) {
 					return;
 				}
-				Integer in = (Integer) table.getValueAt(row, 0);
-				if (in == null) {
+				final Integer id = (Integer) table.getValueAt(row, 0);
+				final Integer status = (table.getValueAt(row, 4).toString() == "can rent") ? 0
+						: 1;
+				final String title = (String) table.getValueAt(row, 1);
+				if (id == null) {
 					JOptionPane.showConfirmDialog(null,
 							"please choice update row", "Warning!",
 							JOptionPane.OK_OPTION);
 					return;
 				}
-				JOptionPane.showConfirmDialog(null, "data updated！", "Info",
-						JOptionPane.OK_OPTION);
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						ModifyStatusPanel msp = new ModifyStatusPanel(id,
+								status, title);
+						WindowUtil.centreWindow(msp);
+						msp.setVisible(true);
+					}
+				});
 			}
 		});
 		jbt_update.setBounds(238, 276, 93, 23);

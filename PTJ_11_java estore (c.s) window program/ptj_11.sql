@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50514
 File Encoding         : 65001
 
-Date: 2014-04-22 13:41:22
+Date: 2014-04-24 21:21:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -63,6 +63,7 @@ CREATE TABLE `rent` (
   `rent_date` date DEFAULT NULL,
   `due_date` date DEFAULT NULL,
   `return_date` date DEFAULT NULL,
+  `late_fee` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `copy_id` (`copy_id`),
@@ -73,7 +74,7 @@ CREATE TABLE `rent` (
 -- ----------------------------
 -- Records of rent
 -- ----------------------------
-INSERT INTO `rent` VALUES ('6', '11', '3', '2014-04-22', '2014-05-22', '2014-04-22');
+INSERT INTO `rent` VALUES ('6', '11', '3', '2014-04-22', '2014-05-22', '2014-04-22', '1000');
 
 -- ----------------------------
 -- Table structure for `store`

@@ -38,6 +38,8 @@ public class MainFrame extends JFrame {
 		final CardLayout cardLayout = new CardLayout();
 		AddRentPanel addRentPanel = new AddRentPanel();
 		cardLayout.addLayoutComponent(addRentPanel, "rent");
+		AddLateFeePanel addLateFeePanel = new AddLateFeePanel();
+		cardLayout.addLayoutComponent(addLateFeePanel, "fee");
 		ReturnRentPanel returnRentPanel = new ReturnRentPanel();
 		cardLayout.addLayoutComponent(returnRentPanel, "return");
 		AddCopyPanel addGoodsPanel = new AddCopyPanel();
@@ -50,6 +52,7 @@ public class MainFrame extends JFrame {
 		cardLayout.addLayoutComponent(queryPanel, "query");
 		jp_right.setLayout(cardLayout);
 		jp_right.add(addRentPanel, "rent");
+		jp_right.add(addLateFeePanel, "fee");
 		jp_right.add(returnRentPanel, "return");
 		jp_right.add(addGoodsPanel, "add");
 		jp_right.add(delGoodsPanel, "del");
@@ -120,16 +123,16 @@ public class MainFrame extends JFrame {
 		contentPane.add(jp_left);
 		jp_left.setLayout(null);
 
-		JButton jbt_rent = new JButton("Rent");
-		jbt_rent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cardLayout.show(jp_right, "rent");
-			}
-		});
-		jbt_rent.setBounds(10, 25, 93, 23);
-		jp_left.add(jbt_rent);
-		
-		if(role == 0){
+		if (role == 0) {
+			JButton jbt_rent = new JButton("Rent");
+			jbt_rent.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cardLayout.show(jp_right, "rent");
+				}
+			});
+			jbt_rent.setBounds(10, 25, 93, 23);
+			jp_left.add(jbt_rent);
+
 			JButton jbt_return = new JButton("Return");
 			jbt_return.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -141,7 +144,16 @@ public class MainFrame extends JFrame {
 		}
 
 		if (role == 1) {
-			JButton jbt_add = new JButton("Add Goods");
+			JButton jbt_fee = new JButton("Fee");
+			jbt_fee.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cardLayout.show(jp_right, "fee");
+				}
+			});
+			jbt_fee.setBounds(10, 25, 93, 23);
+			jp_left.add(jbt_fee);
+
+			JButton jbt_add = new JButton("Add Copy");
 			jbt_add.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					cardLayout.show(jp_right, "add");

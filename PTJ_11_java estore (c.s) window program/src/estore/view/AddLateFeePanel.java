@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -18,12 +19,13 @@ import estore.dao.RentDao;
 import estore.entity.Copy;
 import estore.entity.Log;
 import estore.entity.Rent;
+import estore.util.WindowUtil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-public class ReturnRentPanel extends JPanel {
+public class AddLateFeePanel extends JPanel {
 	private static final long serialVersionUID = 2276201356704591501L;
 	private JTable table;
 
@@ -33,11 +35,11 @@ public class ReturnRentPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ReturnRentPanel() {
+	public AddLateFeePanel() {
 		setLayout(null);
 
 		JPanel topPanel = new JPanel();
-		topPanel.setBorder(new TitledBorder(null, "find your rent record",
+		topPanel.setBorder(new TitledBorder(null, "find all users' rent records",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		topPanel.setBounds(10, 10, 430, 63);
 		add(topPanel);
@@ -47,7 +49,7 @@ public class ReturnRentPanel extends JPanel {
 		jbt_find.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				List<Rent> lr = rd.getRent(MainFrame.user_id);
+				List<Rent> lr = rd.getRent();
 				if (lr != null && lr.size() > 0) {
 					TableModel model = table.getModel();
 					for (int i = 0, j = 0; i < model.getRowCount()
@@ -65,7 +67,7 @@ public class ReturnRentPanel extends JPanel {
 				}
 				else {
 					JOptionPane.showConfirmDialog(null,
-							"sorry, cannot find this game/movie", "Warning！",
+							"sorry, cannot find any games/movies", "Warning！",
 							JOptionPane.OK_OPTION);
 				}
 
@@ -110,26 +112,32 @@ public class ReturnRentPanel extends JPanel {
 		table.getColumnModel().getColumn(0).setPreferredWidth(59);
 		scrollPane.setViewportView(table);
 
-		JButton jbt_del = new JButton("return");
+		JButton jbt_del = new JButton("update");
 		jbt_del.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					TableModel model = table.getModel();
 					int row = table.getSelectedRow();
 					if (row != -1) {
-						Integer rent_id = (Integer) model.getValueAt(row, 0);
-						Integer copy_id = (Integer) model.getValueAt(row, 2);
-						if (rent_id != null && copy_id != null) {
-							rd.returnRent(rent_id);
-							cd.updateStatus(copy_id, 0);
+						final Integer rent_id = (Integer) model.getValueAt(row,
+								0);
+						if (rent_id != null) {
+							SwingUtilities.invokeLater(new Runnable() {
+								@Override
+								public void run() {
+									AddLateFeeFrame aff = new AddLateFeeFrame(
+											rent_id);
+									WindowUtil.centreWindow(aff);
+									aff.setVisible(true);
+								}
+							});
 						}
 					}
 				}
 				catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "Can't Return!");
+					JOptionPane.showMessageDialog(null, "System Error!");
 					return;
 				}
-				JOptionPane.showMessageDialog(null, "Return Success!");
 			}
 		});
 		jbt_del.setBounds(240, 266, 105, 23);
