@@ -1,0 +1,29 @@
+迷宫作业说明：
+1.类的层次结构
+使用了MVC设计模式（这是经典设计模式，可以从网上获取相关资料）
+Module：包maze以及maze.impl
+View：包maze.view
+Controller：包maze.control
+其中包maze下主要是抽象类的包括Robot和Maze以及位置信息Position；另外所有的常量信息在Constant这个类下声明。
+包maze.impl下主要是抽象类的具体实现，其中主要是四种不同类型的Robot，都继承自基本抽象类Robot；另外还实现了Maze抽象类。
+包maze.view下就是显示层类Display的实现
+包maze.control就是GameManager游戏管理器类的具体实现（入口主函数在这里，从这里运行）
+
+2.关于四种类型Robot说明
+LeftHand和RightHand以及Random我都不多做说明了，完全按照你的pdf要求实现
+而Intelligent Robot就是你pdf上的要求，利用了一个栈结构记忆路径加上Random来实现），包maze.impl下的Stack就是利用LinkedList实现的栈结构（Java原有的Stack类已经弃用，所以可以利用这个链表结构自己实现一个栈，非常容易）
+
+3.关于参数的说明
+在Constant中修改读入的迷宫文件，有注释一看就懂
+
+另外在运行程序的时候可以带命令行参数，参数就和你的pdf上一样
+LeftHand: LeftRobot
+RightHand: RightRobot
+Random: RandomRobot
+Intel: IntelRobot
+
+4.pdf分数要求
+Correctness: (20%) 这个不多说，运行下，Intelligent Robot会找到对的路径，不过可能时间会比较长一些，哈因为我们仅仅是记录了一下路径进行回溯。
+Design: (30%) 这个设计我想应该是没问题的，结构很清晰
+Style: (20%) 代码风格我是基于自己长时间的编程以及项目习惯，命名规则包括注释都很完善规范
+Intelligent robot: (20%) 这个就是你们pdf的要求，你运行下程序就知道了。

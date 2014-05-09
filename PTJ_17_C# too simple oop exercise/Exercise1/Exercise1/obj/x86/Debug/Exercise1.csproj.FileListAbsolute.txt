@@ -1,0 +1,4 @@
+E:\vs2010\PTJ_17\Exercise1\Exercise1\bin\Debug\Exercise1.exe
+E:\vs2010\PTJ_17\Exercise1\Exercise1\bin\Debug\Exercise1.pdb
+E:\vs2010\PTJ_17\Exercise1\Exercise1\obj\x86\Debug\Exercise1.exe
+E:\vs2010\PTJ_17\Exercise1\Exercise1\obj\x86\Debug\Exercise1.pdb
