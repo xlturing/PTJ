@@ -39,22 +39,22 @@ public class Position {
 	}
 
 	public void addX() {
-		//this.x++;
-		this.x+=2;
+		// this.x++;
+		this.x += 2;
 	}
 
 	public void subX() {
-		//this.x--;
-		this.x-=2;
+		// this.x--;
+		this.x -= 2;
 	}
 
 	public void addY() {
-		//this.y++;
-		this.y+=2;
+		// this.y++;
+		this.y += 2;
 	}
 
 	public void subY() {
-		//this.y--;
-		this.y-=2;
+		// this.y--;
+		this.y -= 2;
 	}
 }

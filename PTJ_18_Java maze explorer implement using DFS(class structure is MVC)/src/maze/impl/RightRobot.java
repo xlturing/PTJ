@@ -1,5 +1,8 @@
 package maze.impl;
 
+import java.util.Date;
+import java.util.Random;
+
 import maze.Constant;
 import maze.Maze;
 import maze.Robot;
@@ -8,6 +11,8 @@ public class RightRobot extends Robot {
 	public RightRobot(Maze maze) {
 		super(maze);
 	}
+
+	private Random r = new Random((new Date()).getTime());
 
 	@Override
 	public boolean nextMove(Maze maze) {
@@ -20,28 +25,69 @@ public class RightRobot extends Robot {
 		}
 		// If there is no space in four directions, return false.
 		if (i == 4) {
-			return false;
+			next_pos.copyPos(pre_pos);
+			// Turn round
+			switch (faceDir) {
+				case Constant.NORTH:
+					faceDir = Constant.SOUTH;
+					break;
+				case Constant.SOUTH:
+					faceDir = Constant.NORTH;
+					break;
+				case Constant.WEST:
+					faceDir = Constant.EAST;
+					break;
+				case Constant.EAST:
+					faceDir = Constant.WEST;
+					break;
+			}
+			return true;
 		}
 
 		// Turn Right according to the face direction
-		if (faceDir == Constant.NORTH && dir[Constant.EAST])
+		if (faceDir == Constant.NORTH && dir[Constant.EAST]) {
 			this.next_pos.addY();
-		else if (faceDir == Constant.SOUTH && dir[Constant.WEST])
+			faceDir = Constant.EAST;
+		}
+		else if (faceDir == Constant.SOUTH && dir[Constant.WEST]) {
 			this.next_pos.subY();
-		else if (faceDir == Constant.EAST && dir[Constant.SOUTH])
+			faceDir = Constant.WEST;
+		}
+		else if (faceDir == Constant.EAST && dir[Constant.SOUTH]) {
 			this.next_pos.addX();
-		else if (faceDir == Constant.WEST && dir[Constant.NORTH])
+			faceDir = Constant.SOUTH;
+		}
+		else if (faceDir == Constant.WEST && dir[Constant.NORTH]) {
 			this.next_pos.subX();
+			faceDir = Constant.NORTH;
+		}
 		// choice a direction which is available
 		else {
-			if (dir[Constant.NORTH])
-				this.next_pos.subX();
-			else if (dir[Constant.SOUTH])
-				this.next_pos.addX();
-			else if (dir[Constant.WEST])
-				this.next_pos.subY();
-			else
-				this.next_pos.addY();
+			// Choice a random direction
+			while (true) {
+				int randDir = r.nextInt(4);
+				if (this.dir[randDir]) {
+					switch (randDir) {
+						case Constant.NORTH:
+							this.next_pos.subX();
+							faceDir = Constant.NORTH;
+							break;
+						case Constant.SOUTH:
+							this.next_pos.addX();
+							faceDir = Constant.SOUTH;
+							break;
+						case Constant.WEST:
+							this.next_pos.subY();
+							faceDir = Constant.WEST;
+							break;
+						case Constant.EAST:
+							this.next_pos.addY();
+							faceDir = Constant.EAST;
+							break;
+					}
+					break;
+				}
+			}
 		}
 
 		return true;
