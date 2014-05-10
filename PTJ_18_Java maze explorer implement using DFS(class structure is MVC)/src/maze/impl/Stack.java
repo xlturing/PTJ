@@ -10,7 +10,7 @@ public class Stack<T> {
 	private LinkedList<T> stack = new LinkedList<T>();
 
 	public void push(T v) {
-		stack.add(v);
+		stack.addFirst(v);
 	}
 
 	public T peek() {

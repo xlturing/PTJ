@@ -34,8 +34,21 @@ public class IntelRobot extends Robot {
 
 			// recall to the previous position
 			Position p = memRoute.pop();
-			this.pre_pos = this.cur_pos;
-			this.cur_pos = p;
+			this.next_pos = p;
+			switch (faceDir) {
+				case Constant.NORTH:
+					faceDir = Constant.SOUTH;
+					break;
+				case Constant.SOUTH:
+					faceDir = Constant.NORTH;
+					break;
+				case Constant.WEST:
+					faceDir = Constant.EAST;
+					break;
+				case Constant.EAST:
+					faceDir = Constant.WEST;
+					break;
+			}
 			return true;
 		}
 
