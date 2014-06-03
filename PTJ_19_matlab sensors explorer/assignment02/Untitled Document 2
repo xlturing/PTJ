@@ -1,0 +1,32 @@
+ for v=2:cop_no+1
+            sum=0;
+            for n=1:v
+                sum=sum+step_entry(n);
+            end
+            if(i>=sum)
+                plot(move_cop_x(v-1,i), move_cop_y(v-1,i),'bo');
+            end
+        end
+        
+        if ~treasure_catch
+            % plot the thief position treasure not catch
+            if(i>=step_entry(1))
+                plot(move_thief_x(i),move_thief_y(i),'ro');
+                
+            end
+            % plot the room, entry circle and treasure
+            plot([x2,x1],[y1,y1],'r',[x2,x1],[y2,y2],'r',[x1,x1],[y1,y2],'r',[x2,x2],[y1,y2],'r',...
+                x(1,:),y(1,:),'r',escape_x,escape_y,'co',treasure_x,treasure_y,'go');
+        else
+            % plot the thief position treasure catched
+            if(i>=step_entry(1))
+                plot(move_thief_x(i),move_thief_y(i),'ko');
+            end
+            % plot the room, entry circle
+            plot([x2,x1],[y1,y1],'r',[x2,x1],[y2,y2],'r',[x1,x1],[y1,y2],'r',[x2,x2],[y1,y2],'r',...
+                x(1,:),y(1,:),'r',escape_x,escape_y,'co');
+        end
+        
+        drawnow;
+        pause(.05)
+        hold;

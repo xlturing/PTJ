@@ -1,0 +1,28 @@
+# Size of square room, in m
+4
+# Radius of entry, in m
+1.2
+# Position of treasure (x,y), in m
+1.5 -1.1
+# Range of anti-coaking device, in cm
+20
+# Position of escape route (x,y), in m
+0.7 1.2 
+# Time limit (number of time steps), integer
+100000
+# Time limit for each person's entry (max time steps), integer
+30
+# Thief sensor range (radius), in cms
+10
+# Number of cops, integer
+4
+# Cop 1 sensor range (radius), in cms
+3
+# Cop 2 sensor range (radius), in cms
+6
+# Cop 3 sensor range (radius), in cms
+2
+# Cop 4 sensor range (radius), in cms
+6
+# Cop 5 sensor range (radius), in cms
+5
