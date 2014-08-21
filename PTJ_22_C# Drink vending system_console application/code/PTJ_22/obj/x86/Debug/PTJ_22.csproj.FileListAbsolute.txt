@@ -1,0 +1,4 @@
+E:\vs2010\PTJ_22\PTJ_22\bin\Debug\PTJ_22.exe
+E:\vs2010\PTJ_22\PTJ_22\bin\Debug\PTJ_22.pdb
+E:\vs2010\PTJ_22\PTJ_22\obj\x86\Debug\PTJ_22.exe
+E:\vs2010\PTJ_22\PTJ_22\obj\x86\Debug\PTJ_22.pdb
