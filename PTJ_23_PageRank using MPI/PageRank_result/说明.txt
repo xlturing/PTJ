@@ -7,4 +7,4 @@
 		执行：mpjrun.sh -np 8 MPIPageRank pagerank.txt output.txt .001 .85 30
 	4.作业中要求实现computeRank函数的计算过程，我根据PageRank的算法以及MPI的线程先通信机制完成了这一部分并且也在代码中都注释了。
 	
-PS.抱歉发来的有些迟了，因为国内正在过国庆节，有事情出去忙了两天
+PS.抱歉发来的有些迟了，因为国内正在过国庆节，有事情出去忙了两天 
